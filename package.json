@@ -1,0 +1,18 @@
+{
+    "name": "focustrack",
+    "version": "1.0.0",
+    "description": "Professional time and app usage tracking application",
+    "main": "src/main/index.js",
+    "scripts": {
+        "start": "electron .",
+        "dev": "electron . --dev"
+    },
+    "author": "shuhrat-kobulov",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^27.0.0"
+    },
+    "dependencies": {
+        "get-windows": "^9.2.3"
+    }
+}
