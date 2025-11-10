@@ -1,47 +1,229 @@
-a {
-  text-decoration: none;
+/* ===================================
+   FocusTrack - Minimalist Design
+   =================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-li {
-  text-decoration: none;
-}
-li:hover {
-  background-color: lightskyblue;
-}
+
 body,
 html {
-  background-color: skyblue;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        sans-serif;
+    background-color: #fafafa;
+    color: #333;
+    line-height: 1.6;
+    font-size: 16px;
 }
-/* Style the tab */
-/* .tab {
-    overflow: hidden; */
-/* border: 1px solid #ccc; */
-/* background-color: #f1f1f1;
-} */
 
-/* Style the buttons that are used to open the tab content */
+/* Header */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    margin: 2rem 0 0.5rem;
+    color: #222;
+}
+
+h2 {
+    font-size: 4.5rem;
+    font-weight: 200;
+    margin: 2rem 0;
+    color: #111;
+    font-variant-numeric: tabular-nums;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Tab Navigation */
+.tab {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 2rem auto;
+    max-width: 400px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
 .tab button {
-  /* background-color: inherit; */
-  /* border: none; */
-  /* outline: none; */
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
+    flex: 1;
+    padding: 1rem;
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
 }
 
-/* Change background color of buttons on hover */
-/* .tab button:hover {
-    background-color: #ddd;
-} */
+.tab button:hover {
+    color: #333;
+}
 
-/* Create an active/current tablink class */
-/* .tab button.active {
-    background-color: #ccc;
-} */
+.tab button.active {
+    color: #111;
+    border-bottom-color: #111;
+}
 
-/* Style the tab content */
+/* Tab Content */
 .tabcontent {
-  display: none;
-  padding-top: 50px;
-  /* border: 1px solid #ccc;  */
-  /* border-top: none; */
+    display: none;
+    padding: 2rem 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Container */
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Button Group */
+.btn-group {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.btn {
+    padding: 0.875rem 2.5rem;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+    background: #333;
+}
+
+.btn:disabled {
+    background: #ddd;
+    color: #999;
+    cursor: not-allowed;
+}
+
+#start-btn {
+    background: #111;
+}
+
+#stop-btn {
+    background: #666;
+}
+
+#reset-btn {
+    background: #999;
+}
+
+/* List */
+.list-group {
+    list-style: none;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.list-group-item {
+    padding: 1.25rem;
+    margin-bottom: 0.5rem;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    color: #333;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+    border-color: #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+h6 {
+    margin: 1rem 0 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #666;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    background: #111;
+    color: white;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+/* Chart Section */
+#pie {
+    margin: 2rem auto;
+    display: inline-block;
+}
+
+#legend {
+    max-width: 500px;
+    margin: 2rem auto;
+    text-align: left;
+}
+
+#legend h5 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+#legend > div > div {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+#legend > div > div:hover {
+    border-color: #ccc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
 }
