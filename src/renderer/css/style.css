@@ -2,6 +2,34 @@
    FocusTrack - Minimalist Design
    =================================== */
 
+:root {
+    /* Light Mode Colors */
+    --bg-primary: #fafafa;
+    --bg-secondary: #ffffff;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --text-muted: #999;
+    --border-color: #e0e0e0;
+    --button-bg: #111;
+    --button-text: #fff;
+    --button-hover: #333;
+    --shadow: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] {
+    /* Dark Mode Colors */
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-muted: #707070;
+    --border-color: #3a3a3a;
+    --button-bg: #f0f0f0;
+    --button-text: #1a1a1a;
+    --button-hover: #d0d0d0;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,10 +40,11 @@ body,
 html {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
         sans-serif;
-    background-color: #fafafa;
-    color: #333;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     line-height: 1.6;
     font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Header */
@@ -24,19 +53,43 @@ h1 {
     font-weight: 300;
     letter-spacing: -0.5px;
     margin: 2rem 0 0.5rem;
-    color: #222;
+    color: var(--text-primary);
 }
 
 h2 {
     font-size: 4.5rem;
     font-weight: 200;
     margin: 2rem 0;
-    color: #111;
+    color: var(--text-primary);
     font-variant-numeric: tabular-nums;
 }
 
 .text-center {
     text-align: center;
+}
+
+/* Dark Mode Toggle */
+.theme-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px var(--shadow);
 }
 
 /* Tab Navigation */
@@ -46,7 +99,7 @@ h2 {
     gap: 0;
     margin: 2rem auto;
     max-width: 400px;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .tab button {
@@ -54,7 +107,7 @@ h2 {
     padding: 1rem;
     background: none;
     border: none;
-    color: #999;
+    color: var(--text-muted);
     font-size: 1rem;
     font-weight: 400;
     cursor: pointer;
@@ -63,12 +116,12 @@ h2 {
 }
 
 .tab button:hover {
-    color: #333;
+    color: var(--text-primary);
 }
 
 .tab button.active {
-    color: #111;
-    border-bottom-color: #111;
+    color: var(--text-primary);
+    border-bottom-color: var(--text-primary);
 }
 
 /* Tab Content */
@@ -104,8 +157,8 @@ h2 {
 
 .btn {
     padding: 0.875rem 2.5rem;
-    background: #111;
-    color: white;
+    background: var(--button-bg);
+    color: var(--button-text);
     border: none;
     border-radius: 4px;
     font-size: 1rem;
@@ -115,12 +168,11 @@ h2 {
 }
 
 .btn:hover:not(:disabled) {
-    background: #333;
+    background: var(--button-hover);
 }
 
 .btn:disabled {
-    background: #ddd;
-    color: #999;
+    opacity: 0.3;
     cursor: not-allowed;
 }
 
@@ -136,6 +188,27 @@ h2 {
     background: #999;
 }
 
+/* Keyboard Hints */
+.keyboard-hints {
+    margin-top: 2rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+kbd {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
 /* List */
 .list-group {
     list-style: none;
@@ -144,33 +217,76 @@ h2 {
 }
 
 .list-group-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     padding: 1.25rem;
     margin-bottom: 0.5rem;
-    background: white;
-    border: 1px solid #e0e0e0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
-    color: #333;
+    color: var(--text-primary);
     font-size: 1rem;
     transition: all 0.2s ease;
 }
 
 .list-group-item:hover {
-    border-color: #ccc;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-color: var(--text-muted);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+/* App Icon */
+.app-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.app-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.app-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.app-info > div {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.app-info strong {
+    color: var(--text-secondary);
+    font-weight: 500;
 }
 
 h6 {
     margin: 1rem 0 0.5rem;
     font-size: 0.95rem;
     font-weight: 400;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .badge {
     display: inline-block;
     padding: 0.3rem 0.75rem;
-    background: #111;
-    color: white;
+    background: var(--button-bg);
+    color: var(--button-text);
     border-radius: 12px;
     font-size: 0.85rem;
     font-weight: 400;
@@ -192,21 +308,21 @@ h6 {
     font-size: 1.25rem;
     font-weight: 400;
     margin-bottom: 1rem;
-    color: #333;
+    color: var(--text-primary);
 }
 
 #legend > div > div {
     padding: 1rem;
     margin: 0.5rem 0;
-    background: white;
-    border: 1px solid #e0e0e0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     font-size: 1rem;
     transition: all 0.2s ease;
 }
 
 #legend > div > div:hover {
-    border-color: #ccc;
+    border-color: var(--text-muted);
 }
 
 /* Responsive */

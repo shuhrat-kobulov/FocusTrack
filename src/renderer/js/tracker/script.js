@@ -110,19 +110,25 @@ function displayActiveWin() {
 
         let appWinTitle = winDetails.title;
         let appName = winDetails.owner.path.split('/')[2].split('.')[0];
+        let appPath = winDetails.owner.path;
 
         if (iter === 0) {
             mainTimerWatch = setInterval(() => addTimer('main-timer'), 1000);
 
-            outputHTML = `<li class="list-group-item list-group-item-info">Window                  Title : ${appWinTitle}
+            // Create list items with icons
+            const icon = window.appIconUtils.createAppIcon(appName, appPath);
+            const iconHTML = icon.outerHTML;
+
+            outputHTML = `<li class="list-group-item list-group-item-info" data-app="${appName}">
+                    ${iconHTML}
+                    <div class="app-info">
+                        <div><strong>Window Title:</strong> ${appWinTitle}</div>
+                        <div><strong>Application:</strong> ${appName}</div>
+                        <div><strong>Time:</strong> <span id="${appName}">00:00:00</span></div>
+                        <h6>Times Opened <span id="span-${appName}" class="badge">${1}</span></h6>
+                    </div>
                     </li>
-                    <li class="list-group-item list-group-item-info">Application Name : ${appName}
-                    </li>
-                    <li class="list-group-item list-group-item-info" id="${appName}">00:00:00
-                    </li>
-                    <h6 style="color: white">Times Opened <span id="span-${appName}" class="badge">${1}</span>
-                    </h6>
-                    <br><br>`;
+                    <br>`;
 
             ulElem.innerHTML = outputHTML;
 
@@ -131,15 +137,19 @@ function displayActiveWin() {
         } else if (!history.includes(appName)) {
             clearInterval(addTimerID);
 
-            outputHTML = `<li class="list-group-item list-group-item-info">Window                  Title : ${appWinTitle}
+            const icon = window.appIconUtils.createAppIcon(appName, appPath);
+            const iconHTML = icon.outerHTML;
+
+            outputHTML = `<li class="list-group-item list-group-item-info" data-app="${appName}">
+                    ${iconHTML}
+                    <div class="app-info">
+                        <div><strong>Window Title:</strong> ${appWinTitle}</div>
+                        <div><strong>Application:</strong> ${appName}</div>
+                        <div><strong>Time:</strong> <span id="${appName}">00:00:00</span></div>
+                        <h6>Times Opened <span id="span-${appName}" class="badge">${1}</span></h6>
+                    </div>
                     </li>
-                    <li class="list-group-item list-group-item-info">Application Name : ${appName}
-                    </li>
-                    <li class="list-group-item list-group-item-info" id="${appName}">00:00:00
-                    </li>
-                    <h6 style="color: white">Times Opened <span id="span-${appName}" class="badge">${1}</span>
-                    </h6>
-                    <br><br>`;
+                    <br>`;
 
             ulElem.innerHTML += outputHTML;
             addTimerID = setInterval(() => addTimer(`${appName}`), 1000);

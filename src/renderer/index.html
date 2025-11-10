@@ -12,6 +12,15 @@
         <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     </head>
     <body>
+        <!-- Dark Mode Toggle -->
+        <button
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Toggle dark mode"
+        >
+            <span id="theme-icon">🌙</span>
+        </button>
+
         <div class="text-center">
             <h1>FocusTrack</h1>
         </div>
@@ -33,7 +42,12 @@
             <div class="container text-center">
                 <h2 id="main-timer">00:00:00</h2>
                 <div class="btn-group">
-                    <button type="button" id="start-btn" class="btn">
+                    <button
+                        type="button"
+                        id="start-btn"
+                        class="btn"
+                        style="color: white"
+                    >
                         Start
                     </button>
                     <button type="button" id="stop-btn" class="btn">
@@ -42,6 +56,12 @@
                     <button type="button" id="reset-btn" class="btn">
                         Reset
                     </button>
+                </div>
+                <div class="keyboard-hints">
+                    <small
+                        >⌨️ Shortcuts: <kbd>Space</kbd> Start/Stop |
+                        <kbd>R</kbd> Reset | <kbd>T</kbd> Switch tab</small
+                    >
                 </div>
             </div>
             <div class="container">
@@ -61,6 +81,9 @@
         </div>
 
         <script src="js/ui/tabs.js"></script>
+        <script src="js/ui/theme-toggle.js"></script>
+        <script src="js/ui/keyboard-shortcuts.js"></script>
+        <script src="js/ui/app-icons.js"></script>
         <script src="js/tracker/timer.js"></script>
         <script src="js/tracker/script.js"></script>
         <script src="js/charts/piechart.js"></script>
