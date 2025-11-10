@@ -5,14 +5,78 @@
     "main": "src/main/index.js",
     "scripts": {
         "start": "electron .",
-        "dev": "electron . --dev"
+        "dev": "electron . --dev",
+        "build": "electron-builder",
+        "build:mac": "electron-builder --mac",
+        "build:win": "electron-builder --win",
+        "build:linux": "electron-builder --linux"
     },
     "author": "shuhrat-kobulov",
     "license": "MIT",
     "devDependencies": {
-        "electron": "^27.0.0"
+        "electron": "^27.0.0",
+        "electron-builder": "^26.0.12"
     },
     "dependencies": {
         "get-windows": "^9.2.3"
+    },
+    "build": {
+        "appId": "com.focustrack.app",
+        "productName": "FocusTrack",
+        "npmRebuild": false,
+        "mac": {
+            "category": "public.app-category.productivity",
+            "target": [
+                {
+                    "target": "dmg",
+                    "arch": [
+                        "x64",
+                        "arm64"
+                    ]
+                },
+                {
+                    "target": "zip",
+                    "arch": [
+                        "x64",
+                        "arm64"
+                    ]
+                }
+            ],
+            "icon": "build/icon.icns"
+        },
+        "win": {
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64",
+                        "ia32"
+                    ]
+                },
+                {
+                    "target": "portable",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ],
+            "icon": "build/icon.ico"
+        },
+        "linux": {
+            "target": [
+                "AppImage",
+                "deb"
+            ],
+            "category": "Utility",
+            "icon": "build/icon.png"
+        },
+        "files": [
+            "src/**/*",
+            "package.json"
+        ],
+        "directories": {
+            "buildResources": "build",
+            "output": "dist"
+        }
     }
 }
