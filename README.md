@@ -38,7 +38,10 @@ FocusTrack is a desktop application built with Electron that automatically track
 ### Prerequisites
 
 -   Node.js (v18 or higher)
--   macOS (for window tracking functionality)
+-   Cross-platform support: Windows, macOS, and Linux
+    -   **macOS**: Screen Recording permission required
+    -   **Windows**: May require administrator privileges for some system access
+    -   **Linux**: Should work out of the box
 
 ### Installation
 
@@ -55,10 +58,21 @@ cd focustrack
 npm install
 ```
 
-3. Grant Screen Recording Permission
+3. Grant Required Permissions
+
+**macOS:**
 
 -   Open **System Settings** → **Privacy & Security** → **Screen Recording**
 -   Add and enable Electron (or the app) to allow window tracking
+
+**Windows:**
+
+-   The application should work without additional permissions
+-   If you encounter issues, try running as administrator
+
+**Linux:**
+
+-   Should work without additional permissions
 
 ### Running the Application
 
@@ -89,7 +103,7 @@ Built files will be in the `dist/` folder.
 
 -   **Electron 27.0.0**: Cross-platform desktop application framework
 -   **Node.js**: JavaScript runtime
--   **get-windows**: Native module for active window detection (macOS)
+-   **get-windows**: Native module for active window detection (cross-platform)
 
 ### Frontend
 
@@ -233,6 +247,24 @@ This is an academic project, but contributions, issues, and feature requests are
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## Troubleshooting
+
+### Windows
+
+-   **Permission Issues**: If the app cannot detect windows, try running as administrator
+-   **GPU Errors**: GPU process errors in console are normal and don't affect functionality
+-   **Antivirus**: Some antivirus software may flag the app - add it to exclusions if needed
+
+### macOS
+
+-   **Screen Recording Permission**: Required for window detection
+-   **Notarization**: For distribution, the app needs to be notarized by Apple
+
+### All Platforms
+
+-   **Node.js Version**: Ensure you're using Node.js v18 or higher
+-   **Module Loading**: If you see "get-windows" errors, try reinstalling dependencies
+
 ## Author
 
 **Shuhrat Kobulov**
@@ -257,6 +289,6 @@ For issues or questions related to this project:
 
 ---
 
-**Note**: This application requires macOS Screen Recording permission. First-time users should grant this permission in System Settings for full functionality.
+**Note**: This application supports Windows, macOS, and Linux. First-time users on macOS should grant Screen Recording permission in System Settings for full functionality.
 
 Made with ❤️ for Amity University Tashkent, Minor Project

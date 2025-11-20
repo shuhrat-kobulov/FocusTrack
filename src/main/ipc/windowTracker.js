@@ -33,18 +33,32 @@ function registerWindowTrackerHandlers() {
         } catch (error) {
             console.error('Error getting active window:', error);
 
-            // Provide helpful error message for permission issues
-            if (error.message && error.message.includes('screen recording')) {
-                throw new Error(
-                    'Screen Recording permission required. Please grant permission in System Settings › Privacy & Security › Screen Recording'
-                );
-            }
+            // Platform-specific error handling
+            const platform = process.platform;
 
-            // Check if it's a command failure (likely permissions)
-            if (error.stdout && error.stdout.includes('screen recording')) {
-                throw new Error(
-                    'Screen Recording permission required. Please enable it in:\nSystem Settings › Privacy & Security › Screen Recording'
-                );
+            if (platform === 'darwin') {
+                // macOS-specific permission errors
+                if (
+                    error.message &&
+                    error.message.includes('screen recording')
+                ) {
+                    throw new Error(
+                        'Screen Recording permission required. Please grant permission in System Settings › Privacy & Security › Screen Recording'
+                    );
+                }
+
+                if (error.stdout && error.stdout.includes('screen recording')) {
+                    throw new Error(
+                        'Screen Recording permission required. Please enable it in:\nSystem Settings › Privacy & Security › Screen Recording'
+                    );
+                }
+            } else if (platform === 'win32') {
+                // Windows-specific error handling
+                if (error.message && error.message.includes('access')) {
+                    throw new Error(
+                        'Windows access permissions required. Please run the application as administrator if issues persist.'
+                    );
+                }
             }
 
             throw error;

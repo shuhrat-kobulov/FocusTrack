@@ -1,19 +1,33 @@
 /**
  * App Icon Utilities
- * Handles extracting and displaying application icons
+ * Handles extracting and displaying application icons across platforms
  */
 
 /**
- * Extract app icon from app bundle path (macOS)
- * @param {string} appPath - Full path to the app bundle
- * @returns {string} - Path to icon or fallback
+ * Extract app icon from app path (cross-platform)
+ * @param {string} appPath - Full path to the application
+ * @returns {string} - Path to icon or null for fallback
  */
 function getAppIconPath(appPath) {
-    // On macOS, apps are in .app bundles
-    // The icon is typically at: AppName.app/Contents/Resources/AppIcon.icns
+    if (!appPath) return null;
 
-    // For now, we'll use a fallback approach with first letter badges
-    // Future enhancement: Use Electron's nativeImage to extract .icns
+    // Platform detection
+    const isWindows = appPath.includes('\\') || appPath.match(/^[A-Z]:/);
+    const isMacOS = appPath.includes('.app/');
+
+    if (isMacOS) {
+        // macOS: AppName.app/Contents/Resources/AppIcon.icns
+        // For future enhancement with nativeImage
+        return null;
+    }
+
+    if (isWindows) {
+        // Windows: Extract icon from .exe (future enhancement)
+        // For now, use fallback
+        return null;
+    }
+
+    // Linux and others: use fallback
     return null;
 }
 

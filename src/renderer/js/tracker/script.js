@@ -1,6 +1,28 @@
 let getActiveWindow;
 let activeWinLoaded = false;
 
+/**
+ * Extract application name from owner object (cross-platform)
+ * @param {Object} owner - Window owner object with path and name
+ * @returns {string} - Clean application name
+ */
+function extractAppName(owner) {
+    // Use the name property if available (preferred)
+    if (owner.name) {
+        return owner.name.replace(/\s+/g, ''); // Remove spaces for consistency
+    }
+
+    // Fallback: extract from path
+    const path = owner.path;
+    if (!path) return 'Unknown';
+
+    // Get filename without extension
+    const filename = path.split(/[/\\]/).pop(); // Handle both / and \ separators
+    const nameWithoutExt = filename.replace(/\.[^/.]+$/, ''); // Remove extension
+
+    return nameWithoutExt;
+}
+
 // Request active window from main process
 async function getActiveWindowWrapper() {
     try {
@@ -11,12 +33,21 @@ async function getActiveWindowWrapper() {
             error.message.includes('Screen Recording') ||
             error.message.includes('screen recording')
         ) {
+            // macOS-specific permission error
             alert(
                 '🔐 PERMISSION REQUIRED\n\n' +
                     error.message +
                     '\n\n📝 Steps to fix:\n1. Open System Settings\n2. Go to Privacy & Security › Screen Recording\n3. Find and enable this app (Electron)\n4. Restart the application\n\nThe app needs this permission to track active windows.'
             );
             throw new Error('Screen Recording permission required');
+        } else if (error.message.includes('administrator')) {
+            // Windows-specific permission error
+            alert(
+                '🔐 PERMISSION REQUIRED\n\n' +
+                    error.message +
+                    '\n\n📝 Steps to fix:\n1. Right-click on the application\n2. Select "Run as administrator"\n3. Restart the application\n\nThe app may need elevated permissions on Windows.'
+            );
+            throw new Error('Administrator permission may be required');
         }
         throw error;
     }
@@ -63,7 +94,7 @@ function resume() {
         let winDetails = await getActiveWindow();
 
         let appWinTitle = winDetails.title;
-        let appName = winDetails.owner.path.split('/')[2].split('.')[0];
+        let appName = extractAppName(winDetails.owner);
 
         if (!history.includes(appName)) {
             clearInterval(addTimerID);
@@ -109,7 +140,7 @@ function displayActiveWin() {
         let winDetails = await getActiveWindow();
 
         let appWinTitle = winDetails.title;
-        let appName = winDetails.owner.path.split('/')[2].split('.')[0];
+        let appName = extractAppName(winDetails.owner);
         let appPath = winDetails.owner.path;
 
         if (iter === 0) {
