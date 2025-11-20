@@ -2,17 +2,13 @@
 
 > A minimalist time tracking application that monitors your application usage and helps you understand where your time goes.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Electron](https://img.shields.io/badge/Electron-27.0.0-47848F?logo=electron)](https://www.electronjs.org/)
-[![Platform](https://img.shields.io/badge/Platform-macOS-blue)](https://www.apple.com/macos/)
-
-## 📖 About
+## About
 
 FocusTrack is a desktop application built with Electron that automatically tracks which applications you use throughout your day. It provides detailed insights into your productivity patterns through an intuitive dashboard and beautiful data visualizations.
 
 **Academic Context:** This project was developed as a minor project for NTCC (University), demonstrating practical application of modern web technologies in desktop application development.
 
-## ✨ Features
+## Features
 
 ### Core Functionality
 
@@ -87,7 +83,7 @@ npm run build:linux
 
 Built files will be in the `dist/` folder.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Core Technologies
 
@@ -107,7 +103,7 @@ Built files will be in the `dist/` folder.
 -   **electron-builder**: Application packaging and distribution
 -   **npm scripts**: Development and build automation
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 FocusTrack/
@@ -140,7 +136,7 @@ FocusTrack/
 └── FEATURES.md                   # Feature documentation
 ```
 
-## 🎯 Key Features Explained
+## Key Features Explained
 
 ### Automatic Window Tracking
 
@@ -171,7 +167,7 @@ Uses the `get-windows` native module to detect the currently active application 
 -   Prevents conflicts with text input fields
 -   Visual hints displayed in the UI
 
-## 🔒 Privacy & Permissions
+## Privacy & Permissions
 
 FocusTrack requires **Screen Recording** permission on macOS to detect active windows. This is a system-level security feature.
 
@@ -182,7 +178,7 @@ FocusTrack requires **Screen Recording** permission on macOS to detect active wi
 -   No analytics or tracking
 -   No internet connection required
 
-## 📊 Academic Project Details
+## Academic Project Details
 
 ### Course Information
 
@@ -208,14 +204,14 @@ FocusTrack requires **Screen Recording** permission on macOS to detect active wi
 -   Cross-platform build configuration
 -   macOS permission handling
 
-## 🐛 Known Limitations
+## Known Limitations
 
 -   **macOS Only**: Window tracking currently only works on macOS
 -   **Windows Version**: Would require different native module (e.g., `active-win`)
 -   **Code Signing**: Unsigned builds show security warnings on macOS
 -   **Wine on Apple Silicon**: Cannot build Windows installers from M1/M2/M3 Macs
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 -   [ ] Windows and Linux support with platform-specific window trackers
 -   [ ] Export data to CSV/JSON
@@ -227,7 +223,7 @@ FocusTrack requires **Screen Recording** permission on macOS to detect active wi
 -   [ ] Auto-start on system boot
 -   [ ] Idle time detection
 
-## 🤝 Contributing
+## Contributing
 
 This is an academic project, but contributions, issues, and feature requests are welcome!
 
@@ -237,32 +233,22 @@ This is an academic project, but contributions, issues, and feature requests are
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
+## Author
 
 **Shuhrat Kobulov**
 
 -   GitHub: [@shuhrat-kobulov](https://github.com/shuhrat-kobulov)
--   University: NTCC
+-   University: Amity University Tashkent
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 -   Electron team for the excellent framework
 -   D3.js community for visualization tools
 -   `get-windows` package maintainers
 -   Bootstrap for CSS utilities
--   NTCC University for project support
+-   Amity University Tashkent for project support
 
-## 📚 Documentation
-
--   [Build Instructions](BUILD.md) - Detailed guide for building installers
--   [Distribution Guide](DISTRIBUTION.md) - Quick start for sharing the app
--   [Features Documentation](FEATURES.md) - Complete feature list and usage
-
-## 📧 Support
+## Support
 
 For issues or questions related to this project:
 
@@ -273,4 +259,4 @@ For issues or questions related to this project:
 
 **Note**: This application requires macOS Screen Recording permission. First-time users should grant this permission in System Settings for full functionality.
 
-Made with ❤️ for NTCC University Minor Project
+Made with ❤️ for Amity University Tashkent, Minor Project
