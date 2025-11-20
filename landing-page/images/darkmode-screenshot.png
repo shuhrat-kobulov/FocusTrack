@@ -1,0 +1,40 @@
+<svg width="400" height="250" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="250" fill="#1a1a1a"/>
+  <rect x="0" y="0" width="400" height="32" fill="#333"/>
+  <circle cx="16" cy="16" r="4" fill="#ff5f56"/>
+  <circle cx="32" cy="16" r="4" fill="#ffbd2e"/>
+  <circle cx="48" cy="16" r="4" fill="#27ca3f"/>
+  <text x="200" y="19" text-anchor="middle" font-family="Inter" font-size="11" fill="white">FocusTrack - Dark Mode</text>
+  
+  <!-- Dark mode sidebar -->
+  <rect x="20" y="45" width="80" height="180" fill="#2a2a2a" rx="4"/>
+  <rect x="30" y="60" width="60" height="12" fill="#667eea" rx="2"/>
+  <rect x="30" y="80" width="45" height="8" fill="#555" rx="2"/>
+  <rect x="30" y="95" width="50" height="8" fill="#555" rx="2"/>
+  
+  <!-- Dark mode main area -->
+  <rect x="110" y="45" width="270" height="180" fill="#2a2a2a" rx="4"/>
+  
+  <!-- Dark mode chart -->
+  <circle cx="200" cy="130" r="45" fill="none" stroke="#667eea" stroke-width="10"/>
+  <circle cx="200" cy="130" r="45" fill="none" stroke="#764ba2" stroke-width="10" stroke-dasharray="90 50" transform="rotate(-90 200 130)"/>
+  <circle cx="200" cy="130" r="45" fill="none" stroke="#555" stroke-width="10" stroke-dasharray="70 70" transform="rotate(90 200 130)"/>
+  
+  <!-- Dark mode stats -->
+  <rect x="300" y="70" width="70" height="30" fill="#333" rx="4"/>
+  <text x="335" y="82" text-anchor="middle" font-family="Inter" font-size="8" fill="#667eea">3h 45m</text>
+  <text x="335" y="92" text-anchor="middle" font-family="Inter" font-size="6" fill="#ccc">Today</text>
+  
+  <rect x="300" y="110" width="70" height="30" fill="#333" rx="4"/>
+  <text x="335" y="122" text-anchor="middle" font-family="Inter" font-size="8" fill="#764ba2">Terminal</text>
+  <text x="335" y="132" text-anchor="middle" font-family="Inter" font-size="6" fill="#ccc">Top App</text>
+  
+  <!-- Dark mode active indicator -->
+  <rect x="120" y="200" width="6" height="6" fill="#27ca3f" rx="3"/>
+  <text x="135" y="205" font-family="Inter" font-size="9" fill="#27ca3f">Tracking Active</text>
+  
+  <!-- Dark mode toggle indicator -->
+  <rect x="320" y="200" width="40" height="20" fill="#667eea" rx="10"/>
+  <circle cx="350" cy="210" r="7" fill="white"/>
+  <text x="280" y="206" font-family="Inter" font-size="8" fill="#ccc">Dark</text>
+</svg>

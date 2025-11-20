@@ -1,0 +1,40 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  
+  <!-- Window frame -->
+  <rect x="20" y="40" width="360" height="240" rx="8" fill="white" stroke="#e9ecef" stroke-width="2"/>
+  
+  <!-- Title bar -->
+  <rect x="20" y="40" width="360" height="32" rx="8" fill="#667eea"/>
+  <circle cx="36" cy="56" r="4" fill="#ff5f56"/>
+  <circle cx="52" cy="56" r="4" fill="#ffbd2e"/>
+  <circle cx="68" cy="56" r="4" fill="#27ca3f"/>
+  <text x="200" y="59" text-anchor="middle" font-family="Inter" font-size="12" fill="white">FocusTrack Dashboard</text>
+  
+  <!-- Sidebar -->
+  <rect x="32" y="84" width="80" height="184" fill="#f8f9fa" rx="4"/>
+  <rect x="40" y="96" width="64" height="12" fill="#667eea" rx="2"/>
+  <rect x="40" y="116" width="48" height="8" fill="#ccc" rx="2"/>
+  <rect x="40" y="132" width="56" height="8" fill="#ccc" rx="2"/>
+  
+  <!-- Main content area -->
+  <rect x="124" y="84" width="244" height="184" fill="white" rx="4"/>
+  
+  <!-- Chart placeholder -->
+  <circle cx="200" cy="150" r="50" fill="none" stroke="#667eea" stroke-width="8"/>
+  <circle cx="200" cy="150" r="50" fill="none" stroke="#764ba2" stroke-width="8" stroke-dasharray="100 50" transform="rotate(-90 200 150)"/>
+  <circle cx="200" cy="150" r="50" fill="none" stroke="#f0f0f0" stroke-width="8" stroke-dasharray="80 70" transform="rotate(90 200 150)"/>
+  
+  <!-- Stats -->
+  <rect x="280" y="100" width="76" height="32" fill="#f8f9fa" rx="4"/>
+  <text x="318" y="112" text-anchor="middle" font-family="Inter" font-size="8" fill="#667eea">2h 30m</text>
+  <text x="318" y="124" text-anchor="middle" font-family="Inter" font-size="6" fill="#888">Today</text>
+  
+  <rect x="280" y="140" width="76" height="32" fill="#f8f9fa" rx="4"/>
+  <text x="318" y="152" text-anchor="middle" font-family="Inter" font-size="8" fill="#764ba2">Visual Studio Code</text>
+  <text x="318" y="164" text-anchor="middle" font-family="Inter" font-size="6" fill="#888">Top App</text>
+  
+  <!-- Active indicator -->
+  <rect x="140" y="220" width="8" height="8" fill="#27ca3f" rx="4"/>
+  <text x="156" y="227" font-family="Inter" font-size="10" fill="#27ca3f">Tracking Active</text>
+</svg>

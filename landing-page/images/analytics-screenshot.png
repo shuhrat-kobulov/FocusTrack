@@ -1,0 +1,40 @@
+<svg width="400" height="250" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="250" fill="white"/>
+  <rect x="0" y="0" width="400" height="32" fill="#667eea"/>
+  <circle cx="16" cy="16" r="4" fill="#ff5f56"/>
+  <circle cx="32" cy="16" r="4" fill="#ffbd2e"/>
+  <circle cx="48" cy="16" r="4" fill="#27ca3f"/>
+  <text x="200" y="19" text-anchor="middle" font-family="Inter" font-size="11" fill="white">FocusTrack - Analytics</text>
+  
+  <!-- Bar chart -->
+  <rect x="40" y="190" width="20" height="30" fill="#667eea"/>
+  <rect x="70" y="180" width="20" height="40" fill="#764ba2"/>
+  <rect x="100" y="170" width="20" height="50" fill="#667eea"/>
+  <rect x="130" y="160" width="20" height="60" fill="#764ba2"/>
+  <rect x="160" y="140" width="20" height="80" fill="#667eea"/>
+  <rect x="190" y="150" width="20" height="70" fill="#764ba2"/>
+  <rect x="220" y="165" width="20" height="55" fill="#667eea"/>
+  
+  <!-- Labels -->
+  <text x="50" y="235" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">Mon</text>
+  <text x="80" y="235" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">Tue</text>
+  <text x="110" y="235" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">Wed</text>
+  <text x="140" y="235" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">Thu</text>
+  <text x="170" y="235" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">Fri</text>
+  <text x="200" y="235" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">Sat</text>
+  <text x="230" y="235" text-anchor="middle" font-family="Inter" font-size="8" fill="#666">Sun</text>
+  
+  <!-- Weekly summary -->
+  <rect x="280" y="60" width="100" height="160" fill="#f8f9fa" rx="4"/>
+  <text x="330" y="80" text-anchor="middle" font-family="Inter" font-size="12" font-weight="600" fill="#333">This Week</text>
+  
+  <text x="290" y="105" font-family="Inter" font-size="10" fill="#666">Total Time</text>
+  <text x="290" y="120" font-family="Inter" font-size="14" font-weight="600" fill="#667eea">42h 15m</text>
+  
+  <text x="290" y="145" font-family="Inter" font-size="10" fill="#666">Most Used</text>
+  <text x="290" y="160" font-family="Inter" font-size="12" font-weight="600" fill="#764ba2">VS Code</text>
+  <text x="290" y="175" font-family="Inter" font-size="10" fill="#666">18h 30m</text>
+  
+  <text x="290" y="200" font-family="Inter" font-size="10" fill="#666">Productivity</text>
+  <text x="290" y="215" font-family="Inter" font-size="14" font-weight="600" fill="#27ca3f">+12%</text>
+</svg>

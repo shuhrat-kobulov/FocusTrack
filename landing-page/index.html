@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="FocusTrack - Professional time tracking application that monitors your app usage and helps boost productivity. Download for Windows, macOS, and Linux."
+        />
+        <meta
+            name="keywords"
+            content="time tracking, productivity, application monitoring, focus tracker, time management, desktop app"
+        />
+        <meta name="author" content="FocusTrack Team" />
+
+        <!-- Open Graph Meta Tags -->
+        <meta
+            property="og:title"
+            content="FocusTrack - Track Your Time, Boost Your Productivity"
+        />
+        <meta
+            property="og:description"
+            content="Professional time tracking application that monitors your app usage and helps boost productivity."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://focustrack.app" />
+
+        <title>FocusTrack - Track Your Time, Boost Your Productivity</title>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="images/favicon.png" />
+
+        <!-- Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <nav class="navbar">
+                    <div class="navbar-brand">
+                        <img
+                            src="images/logo.svg"
+                            alt="FocusTrack Logo"
+                            class="logo"
+                        />
+                        <span class="brand-name">FocusTrack</span>
+                    </div>
+
+                    <div class="navbar-menu" id="navbarMenu">
+                        <ul class="navbar-nav">
+                            <li>
+                                <a href="#features" class="nav-link"
+                                    >Features</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#download" class="nav-link"
+                                    >Download</a
+                                >
+                            </li>
+                            <li><a href="#about" class="nav-link">About</a></li>
+                            <li>
+                                <a href="#faq" class="nav-link">FAQ</a>
+                            </li>
+                        </ul>
+                        <div class="navbar-actions">
+                            <a
+                                href="https://github.com/shuhrat-kobulov/FocusTrack"
+                                class="github-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="View source code on GitHub"
+                            >
+                                <i class="fab fa-github"></i>
+                                <span class="github-text">GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <button class="navbar-toggle" id="navbarToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            Track Your Time,<br />
+                            <span class="highlight"
+                                >Boost Your Productivity</span
+                            >
+                        </h1>
+                        <p class="hero-description">
+                            FocusTrack is a minimalist time tracking application
+                            that automatically monitors your application usage
+                            and helps you understand where your time goes with
+                            beautiful visualizations.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#download" class="btn btn-primary">
+                                <i class="fas fa-download"></i>
+                                Download Now
+                            </a>
+                            <a href="#features" class="btn btn-secondary">
+                                Learn More
+                            </a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label"
+                                    >Free & Open Source</span
+                                >
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">Cross-Platform</span>
+                                <span class="stat-label"
+                                    >Windows, macOS, Linux</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img
+                            src="images/hero-screenshot.png"
+                            alt="FocusTrack Application Screenshot"
+                            class="hero-screenshot"
+                        />
+                        <div class="floating-card card-1">
+                            <i class="fas fa-clock"></i>
+                            <span>Real-time Tracking</span>
+                        </div>
+                        <div class="floating-card card-2">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Visual Analytics</span>
+                        </div>
+                        <div class="floating-card card-3">
+                            <i class="fas fa-moon"></i>
+                            <span>Dark Mode</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Powerful Features</h2>
+                    <p class="section-description">
+                        Everything you need to track your time and boost
+                        productivity
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <h3 class="feature-title">Automatic Tracking</h3>
+                        <p class="feature-description">
+                            Automatically monitors active applications in
+                            real-time without any manual intervention required.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Detailed Analytics</h3>
+                        <p class="feature-description">
+                            Get comprehensive insights with beautiful pie charts
+                            and detailed breakdowns of your time usage.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                        <h3 class="feature-title">Keyboard Shortcuts</h3>
+                        <p class="feature-description">
+                            Quick access to all major functions with intuitive
+                            keyboard shortcuts for power users.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3 class="feature-title">Beautiful Design</h3>
+                        <p class="feature-description">
+                            Dark mode support with smooth transitions and
+                            colorful app icons for visual identification.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync"></i>
+                        </div>
+                        <h3 class="feature-title">Live Updates</h3>
+                        <p class="feature-description">
+                            Real-time display of active window information with
+                            immediate updates to your dashboard.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Privacy First</h3>
+                        <p class="feature-description">
+                            All data stays on your device. No cloud tracking, no
+                            data collection, complete privacy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots Section -->
+        <section class="screenshots">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">See It In Action</h2>
+                    <p class="section-description">
+                        Beautiful and intuitive interface designed for
+                        productivity
+                    </p>
+                </div>
+
+                <div class="screenshot-gallery">
+                    <div class="screenshot-item">
+                        <img
+                            src="images/dashboard-screenshot.png"
+                            alt="FocusTrack Dashboard"
+                            class="screenshot-img"
+                        />
+                        <div class="screenshot-overlay">
+                            <h4>Dashboard View</h4>
+                            <p>
+                                Real-time tracking with beautiful visualizations
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="screenshot-item">
+                        <img
+                            src="images/analytics-screenshot.png"
+                            alt="FocusTrack Analytics"
+                            class="screenshot-img"
+                        />
+                        <div class="screenshot-overlay">
+                            <h4>Analytics Page</h4>
+                            <p>
+                                Detailed insights into your productivity
+                                patterns
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="screenshot-item">
+                        <img
+                            src="images/darkmode-screenshot.png"
+                            alt="FocusTrack Dark Mode"
+                            class="screenshot-img"
+                        />
+                        <div class="screenshot-overlay">
+                            <h4>Dark Mode</h4>
+                            <p>
+                                Easy on the eyes with smooth theme transitions
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section class="download" id="download">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Download FocusTrack</h2>
+                    <p class="section-description">
+                        Available for all major platforms - choose your
+                        operating system
+                    </p>
+                    <div class="version-info">
+                        <span class="current-version"
+                            >Current Version: 1.0.0</span
+                        >
+                        <span class="release-date"
+                            >Released: November 2024</span
+                        >
+                    </div>
+                </div>
+
+                <div class="download-grid">
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fab fa-windows"></i>
+                        </div>
+                        <h3 class="download-title">Windows</h3>
+                        <p class="download-description">Windows 10 or later</p>
+                        <div class="download-size">~50 MB</div>
+                        <a
+                            href="#"
+                            class="download-btn"
+                            data-platform="windows"
+                        >
+                            <i class="fas fa-download"></i>
+                            Download for Windows
+                        </a>
+                        <div class="download-options">
+                            <a href="#" class="download-option"
+                                >64-bit Installer</a
+                            >
+                            <a href="#" class="download-option"
+                                >Portable Version</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="download-card featured">
+                        <div class="featured-badge">Most Popular</div>
+                        <div class="download-icon">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <h3 class="download-title">macOS</h3>
+                        <p class="download-description">macOS 10.15 or later</p>
+                        <div class="download-size">~45 MB</div>
+                        <a href="#" class="download-btn" data-platform="mac">
+                            <i class="fas fa-download"></i>
+                            Download for macOS
+                        </a>
+                        <div class="download-options">
+                            <a href="#" class="download-option">Intel Macs</a>
+                            <a href="#" class="download-option"
+                                >Apple Silicon</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fab fa-linux"></i>
+                        </div>
+                        <h3 class="download-title">Linux</h3>
+                        <p class="download-description">
+                            Ubuntu 18.04 or later
+                        </p>
+                        <div class="download-size">~48 MB</div>
+                        <a href="#" class="download-btn" data-platform="linux">
+                            <i class="fas fa-download"></i>
+                            Download for Linux
+                        </a>
+                        <div class="download-options">
+                            <a href="#" class="download-option">.deb Package</a>
+                            <a href="#" class="download-option">.AppImage</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2 class="section-title">About FocusTrack</h2>
+                        <p class="about-description">
+                            FocusTrack was born from a simple need:
+                            understanding where our time goes during the
+                            workday. Built with modern web technologies and
+                            packaged as a desktop application, it provides the
+                            perfect balance of functionality and simplicity.
+                        </p>
+                        <p class="about-description">
+                            Originally developed as an academic project for NTCC
+                            University, FocusTrack demonstrates practical
+                            application of modern web technologies in desktop
+                            application development using Electron.
+                        </p>
+
+                        <div class="about-stats">
+                            <div class="about-stat">
+                                <h4>Open Source</h4>
+                                <p>
+                                    Fully open source and transparent
+                                    development
+                                </p>
+                            </div>
+                            <div class="about-stat">
+                                <h4>Privacy Focused</h4>
+                                <p>
+                                    All data stays on your device, no tracking
+                                </p>
+                            </div>
+                            <div class="about-stat">
+                                <h4>Cross Platform</h4>
+                                <p>
+                                    Works seamlessly across all major platforms
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="tech-stack">
+                            <h4>Built With</h4>
+                            <div class="tech-badges">
+                                <span class="tech-badge">Electron</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">Chart.js</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-image">
+                        <img
+                            src="images/about-illustration.svg"
+                            alt="Time tracking illustration"
+                            class="about-img"
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p class="section-description">
+                        Got questions? We've got answers.
+                    </p>
+                </div>
+
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Is FocusTrack really free?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>
+                                Yes! FocusTrack is completely free and open
+                                source. There are no hidden costs, premium
+                                features, or subscription fees.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Does FocusTrack collect my data?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>
+                                No. All your data stays on your device. We don't
+                                collect, store, or transmit any of your usage
+                                data to external servers.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What are the system requirements?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>
+                                FocusTrack requires Windows 10+, macOS 10.15+,
+                                or Ubuntu 18.04+. It uses minimal system
+                                resources and runs efficiently on most modern
+                                computers.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Can I contribute to the project?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>
+                                Absolutely! FocusTrack is open source. You can
+                                contribute by reporting bugs, suggesting
+                                features, or submitting pull requests on our
+                                GitHub repository.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer" id="contact">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p class="footer-copyright">
+                        © 2025 FocusTrack. Made with ❤️ for productivity
+                        enthusiasts.
+                    </p>
+                    <p class="footer-academic">
+                        Academic project developed for Amity University Tashkent
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Download Modal -->
+        <div class="modal" id="downloadModal">
+            <div class="modal-content">
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-header">
+                    <i class="fas fa-download modal-icon"></i>
+                    <h3 class="modal-title">Download Starting...</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-description">
+                        Your download should start automatically. If it doesn't,
+                        click the link below.
+                    </p>
+                    <div class="modal-download-info">
+                        <div class="download-file-info">
+                            <span class="file-name" id="fileName"
+                                >focustrack-1.0.0-setup.exe</span
+                            >
+                            <span class="file-size" id="fileSize">~50 MB</span>
+                        </div>
+                        <a href="#" class="download-link" id="downloadLink">
+                            <i class="fas fa-download"></i>
+                            Download Manually
+                        </a>
+                    </div>
+                    <div class="modal-help">
+                        <h4>Need Help?</h4>
+                        <ul class="help-list">
+                            <li>
+                                Make sure your antivirus allows the download
+                            </li>
+                            <li>
+                                Check your Downloads folder if the file doesn't
+                                appear
+                            </li>
+                            <li>Contact support if you encounter any issues</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Top Button -->
+        <button class="back-to-top" id="backToTop">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+
+        <!-- JavaScript -->
+        <script src="js/main.js"></script>
+    </body>
+</html>
