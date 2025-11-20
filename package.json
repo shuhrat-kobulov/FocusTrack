@@ -9,13 +9,16 @@
         "build": "electron-builder",
         "build:mac": "electron-builder --mac",
         "build:win": "electron-builder --win",
-        "build:linux": "electron-builder --linux"
+        "build:linux": "electron-builder --linux",
+        "generate-icons": "node generate-icons.js",
+        "prebuild": "npm run generate-icons"
     },
     "author": "shuhrat-kobulov",
     "license": "MIT",
     "devDependencies": {
         "electron": "^27.0.0",
-        "electron-builder": "^26.0.12"
+        "electron-builder": "^26.0.12",
+        "icon-gen": "^5.0.0"
     },
     "dependencies": {
         "get-windows": "^9.2.3"

@@ -1,0 +1,33 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with rounded corners -->
+  <rect width="1024" height="1024" rx="160" fill="url(#gradient)"/>
+  
+  <!-- Main diamond shape (focus/tracking symbol) -->
+  <path d="M512 200L640 328L512 456L384 328L512 200Z" fill="white" stroke="rgba(255,255,255,0.3)" stroke-width="4"/>
+  
+  <!-- Inner diamond for depth -->
+  <path d="M512 240L600 328L512 416L424 328L512 240Z" fill="rgba(255,255,255,0.1)"/>
+  
+  <!-- Circle representing continuous tracking -->
+  <circle cx="512" cy="600" r="120" fill="white" stroke="rgba(255,255,255,0.3)" stroke-width="4"/>
+  
+  <!-- Inner circle for depth -->
+  <circle cx="512" cy="600" r="80" fill="rgba(255,255,255,0.1)"/>
+  
+  <!-- Small accent dots for activity indicators -->
+  <circle cx="450" cy="750" r="20" fill="rgba(255,255,255,0.6)"/>
+  <circle cx="512" cy="780" r="16" fill="rgba(255,255,255,0.8)"/>
+  <circle cx="574" cy="750" r="20" fill="rgba(255,255,255,0.6)"/>
+  
+  <!-- Subtle connecting lines -->
+  <line x1="512" y1="456" x2="512" y2="480" stroke="rgba(255,255,255,0.4)" stroke-width="3"/>
+  <line x1="512" y1="720" x2="512" y2="730" stroke="rgba(255,255,255,0.4)" stroke-width="3"/>
+  
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#667eea"/>
+      <stop offset="0.5" stop-color="#6a7beb"/>
+      <stop offset="1" stop-color="#764ba2"/>
+    </linearGradient>
+  </defs>
+</svg>

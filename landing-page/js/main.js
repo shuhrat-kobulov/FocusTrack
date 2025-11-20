@@ -70,19 +70,22 @@ window.addEventListener('scroll', handleHeaderScroll);
 // Download functionality
 const downloadLinks = {
     windows: {
-        url: 'https://github.com/shuhrat-kobulov/FocusTrack/releases/download/v1.0.0/FocusTrack-1.0.0-Setup.exe',
-        filename: 'FocusTrack-1.0.0-Setup.exe',
-        size: '~50 MB',
+        url: 'https://github.com/shuhrat-kobulov/FocusTrack/releases/download/v1.0.0/FocusTrack.Setup.1.0.0.exe',
+        filename: 'FocusTrack-Setup-1.0.0.exe',
+        size: '~140 MB',
+        fallbackUrl: '../dist/FocusTrack Setup 1.0.0.exe', // Local fallback
     },
     mac: {
         url: 'https://github.com/shuhrat-kobulov/FocusTrack/releases/download/v1.0.0/FocusTrack-1.0.0.dmg',
         filename: 'FocusTrack-1.0.0.dmg',
         size: '~45 MB',
+        fallbackUrl: '../dist/FocusTrack-1.0.0.dmg',
     },
     linux: {
-        url: 'https://github.com/shuhrat-kobulov/FocusTrack/releases/download/v1.0.0/FocusTrack-1.0.0.AppImage',
+        url: 'https://github.com/shuhrat-kobulov/FocusTrack/releases/download/v1.0.0npm /FocusTrack-1.0.0.AppImage',
         filename: 'FocusTrack-1.0.0.AppImage',
         size: '~48 MB',
+        fallbackUrl: '../dist/FocusTrack-1.0.0.AppImage',
     },
 };
 
@@ -100,6 +103,7 @@ function handleDownload(platform) {
 
     if (!downloadInfo) {
         console.error('Download info not found for platform:', platform);
+        showErrorMessage('Download not available for this platform.');
         return;
     }
 
@@ -115,17 +119,106 @@ function handleDownload(platform) {
     // Show modal
     showModal();
 
-    // Start download
+    // Try to download from primary URL, fallback to local if needed
+    downloadFile(
+        downloadInfo.url,
+        downloadInfo.fallbackUrl,
+        downloadInfo.filename
+    );
+
+    // Track download
+    trackDownload(platform);
+}
+
+// Enhanced download function with error handling
+function downloadFile(primaryUrl, fallbackUrl, filename) {
+    // First, try to check if the primary URL is accessible
+    fetch(primaryUrl, { method: 'HEAD' })
+        .then((response) => {
+            if (response.ok) {
+                // Primary URL is accessible, start download
+                initiateDownload(primaryUrl, filename);
+            } else {
+                // Try fallback URL
+                console.warn(
+                    'Primary download URL not accessible, trying fallback...'
+                );
+                initiateDownload(fallbackUrl, filename);
+            }
+        })
+        .catch((error) => {
+            console.warn(
+                'Error checking primary URL, trying fallback...',
+                error
+            );
+            initiateDownload(fallbackUrl, filename);
+        });
+}
+
+// Function to actually start the download
+function initiateDownload(url, filename) {
     const link = document.createElement('a');
-    link.href = downloadInfo.url;
-    link.download = downloadInfo.filename;
+    link.href = url;
+    link.download = filename;
     link.target = '_blank';
+
+    // Add the link to the DOM temporarily
     document.body.appendChild(link);
+
+    // Trigger the download
     link.click();
+
+    // Clean up
     document.body.removeChild(link);
 
-    // Track download (if analytics is implemented)
-    trackDownload(platform);
+    // Update modal with success message
+    updateModalWithSuccess();
+}
+
+// Function to update modal with success message
+function updateModalWithSuccess() {
+    setTimeout(() => {
+        const modalTitle = document.querySelector('.modal-title');
+        const modalDescription = document.querySelector('.modal-description');
+
+        if (modalTitle) modalTitle.textContent = 'Download Started!';
+        if (modalDescription) {
+            modalDescription.innerHTML = `
+                <i class="fas fa-check-circle" style="color: #27ca3f; margin-right: 8px;"></i>
+                Your download should start automatically. Check your Downloads folder.
+            `;
+        }
+    }, 500);
+}
+
+// Function to show error message
+function showErrorMessage(message) {
+    const modal = document.getElementById('downloadModal');
+    const modalContent = modal?.querySelector('.modal-content');
+
+    if (modalContent) {
+        modalContent.innerHTML = `
+            <button class="modal-close" onclick="hideModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <i class="fas fa-exclamation-triangle modal-icon" style="color: #ff6b6b;"></i>
+                <h3 class="modal-title">Download Error</h3>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">${message}</p>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://github.com/shuhrat-kobulov/FocusTrack/releases" 
+                       target="_blank" 
+                       class="btn btn-primary">
+                        <i class="fab fa-github"></i>
+                        View All Releases
+                    </a>
+                </div>
+            </div>
+        `;
+    }
+    showModal();
 }
 
 // Modal functionality
