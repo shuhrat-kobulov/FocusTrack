@@ -19,6 +19,11 @@ let isLoaded = false;
  * Register IPC handlers for window tracking
  */
 function registerWindowTrackerHandlers() {
+    // Handle IPC call from renderer to check if window tracker is ready
+    ipcMain.handle('is-window-tracker-ready', async () => {
+        return isLoaded && !!getActiveWindow;
+    });
+
     // Handle IPC call from renderer to get active window
     ipcMain.handle('get-active-window', async () => {
         if (!isLoaded || !getActiveWindow) {

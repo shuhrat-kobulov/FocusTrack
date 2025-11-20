@@ -9,6 +9,12 @@ const { contextBridge, ipcRenderer } = require('electron');
 // ipcRenderer without exposing the entire object
 contextBridge.exposeInMainWorld('electronAPI', {
     /**
+     * Check if the window tracker is ready
+     * @returns {Promise<boolean>} True if window tracker is loaded and ready
+     */
+    isWindowTrackerReady: () => ipcRenderer.invoke('is-window-tracker-ready'),
+
+    /**
      * Get the currently active window information
      * @returns {Promise<Object>} Active window details
      */

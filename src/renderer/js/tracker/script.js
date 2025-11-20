@@ -2,6 +2,40 @@ let getActiveWindow;
 let activeWinLoaded = false;
 
 /**
+ * Initialize the window tracker and wait for it to be ready
+ */
+async function initializeWindowTracker() {
+    try {
+        // Check if the window tracker is ready in the main process
+        const isReady = await window.electronAPI.isWindowTrackerReady();
+
+        if (!isReady) {
+            // Wait a bit and check again
+            console.log('Window tracker not ready, waiting...');
+            setTimeout(initializeWindowTracker, 500);
+            return;
+        }
+
+        // Window tracker is ready, set up the wrapper
+        getActiveWindow = getActiveWindowWrapper;
+        activeWinLoaded = true;
+
+        // Enable the start button
+        const startBtn = document.getElementById('start-btn');
+        if (startBtn) {
+            startBtn.disabled = false;
+            startBtn.textContent = 'Start';
+        }
+
+        console.log('Window tracker initialized successfully');
+    } catch (error) {
+        console.error('Failed to initialize window tracker:', error);
+        // Try again in a moment
+        setTimeout(initializeWindowTracker, 1000);
+    }
+}
+
+/**
  * Extract application name from owner object (cross-platform)
  * @param {Object} owner - Window owner object with path and name
  * @returns {string} - Clean application name
@@ -53,9 +87,10 @@ async function getActiveWindowWrapper() {
     }
 }
 
-getActiveWindow = getActiveWindowWrapper;
-getActiveWindow = getActiveWindowWrapper;
-activeWinLoaded = true;
+// Initialize the window tracker when the page loads
+window.addEventListener('DOMContentLoaded', () => {
+    initializeWindowTracker();
+});
 
 // Timer functions are now loaded from timer.js globally
 
@@ -71,6 +106,9 @@ const startBtn = document.getElementById('start-btn'),
     resetBtn = document.getElementById('reset-btn'),
     ulElem = document.getElementById('list');
 
+// Initially disable all buttons until window tracker is ready
+startBtn.disabled = true;
+startBtn.textContent = 'Loading...';
 stopBtn.disabled = true;
 resetBtn.disabled = true;
 
@@ -91,19 +129,37 @@ startBtn.addEventListener('click', () => {
 
 function resume() {
     let call = async () => {
-        let winDetails = await getActiveWindow();
+        try {
+            let winDetails = await getActiveWindow();
 
-        let appWinTitle = winDetails.title;
-        let appName = extractAppName(winDetails.owner);
+            let appWinTitle = winDetails.title;
+            let appName = extractAppName(winDetails.owner);
 
-        if (!history.includes(appName)) {
-            clearInterval(addTimerID);
-            addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
-            history.push(appName);
-        } else {
-            clearInterval(addTimerID);
-            addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
-            history.push(appName);
+            if (!history.includes(appName)) {
+                clearInterval(addTimerID);
+                addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
+                history.push(appName);
+            } else {
+                clearInterval(addTimerID);
+                addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
+                history.push(appName);
+            }
+        } catch (error) {
+            console.error('Error in resume function:', error);
+            // If window tracker fails, stop the tracking
+            if (
+                error.message &&
+                error.message.includes('Window tracker not loaded')
+            ) {
+                alert(
+                    'Window tracker is not ready. Please stop and start tracking again.'
+                );
+                // Stop the current tracking
+                const stopBtn = document.getElementById('stop-btn');
+                if (stopBtn && !stopBtn.disabled) {
+                    stopBtn.click();
+                }
+            }
         }
     };
     displayFuncID = setInterval(call, 1000);
@@ -137,20 +193,27 @@ resetBtn.addEventListener('click', () => {
 
 function displayActiveWin() {
     let call = async () => {
-        let winDetails = await getActiveWindow();
+        try {
+            let winDetails = await getActiveWindow();
 
-        let appWinTitle = winDetails.title;
-        let appName = extractAppName(winDetails.owner);
-        let appPath = winDetails.owner.path;
+            let appWinTitle = winDetails.title;
+            let appName = extractAppName(winDetails.owner);
+            let appPath = winDetails.owner.path;
 
-        if (iter === 0) {
-            mainTimerWatch = setInterval(() => addTimer('main-timer'), 1000);
+            if (iter === 0) {
+                mainTimerWatch = setInterval(
+                    () => addTimer('main-timer'),
+                    1000
+                );
 
-            // Create list items with icons
-            const icon = window.appIconUtils.createAppIcon(appName, appPath);
-            const iconHTML = icon.outerHTML;
+                // Create list items with icons
+                const icon = window.appIconUtils.createAppIcon(
+                    appName,
+                    appPath
+                );
+                const iconHTML = icon.outerHTML;
 
-            outputHTML = `<li class="list-group-item list-group-item-info" data-app="${appName}">
+                outputHTML = `<li class="list-group-item list-group-item-info" data-app="${appName}">
                     ${iconHTML}
                     <div class="app-info">
                         <div><strong>Window Title:</strong> ${appWinTitle}</div>
@@ -161,17 +224,20 @@ function displayActiveWin() {
                     </li>
                     <br>`;
 
-            ulElem.innerHTML = outputHTML;
+                ulElem.innerHTML = outputHTML;
 
-            addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
-            history.push(appName);
-        } else if (!history.includes(appName)) {
-            clearInterval(addTimerID);
+                addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
+                history.push(appName);
+            } else if (!history.includes(appName)) {
+                clearInterval(addTimerID);
 
-            const icon = window.appIconUtils.createAppIcon(appName, appPath);
-            const iconHTML = icon.outerHTML;
+                const icon = window.appIconUtils.createAppIcon(
+                    appName,
+                    appPath
+                );
+                const iconHTML = icon.outerHTML;
 
-            outputHTML = `<li class="list-group-item list-group-item-info" data-app="${appName}">
+                outputHTML = `<li class="list-group-item list-group-item-info" data-app="${appName}">
                     ${iconHTML}
                     <div class="app-info">
                         <div><strong>Window Title:</strong> ${appWinTitle}</div>
@@ -182,21 +248,38 @@ function displayActiveWin() {
                     </li>
                     <br>`;
 
-            ulElem.innerHTML += outputHTML;
-            addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
-            history.push(appName);
-        } else if (
-            history.includes(appName) &&
-            appName != history[history.length - 1]
-        ) {
-            clearInterval(addTimerID);
-            addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
-            history.push(appName);
-            let badge = document.getElementById(`span-${appName}`);
-            let badgeNum = Number(badge.innerHTML);
-            badge.innerHTML = badgeNum + 1;
+                ulElem.innerHTML += outputHTML;
+                addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
+                history.push(appName);
+            } else if (
+                history.includes(appName) &&
+                appName != history[history.length - 1]
+            ) {
+                clearInterval(addTimerID);
+                addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
+                history.push(appName);
+                let badge = document.getElementById(`span-${appName}`);
+                let badgeNum = Number(badge.innerHTML);
+                badge.innerHTML = badgeNum + 1;
+            }
+            iter++;
+        } catch (error) {
+            console.error('Error in displayActiveWin function:', error);
+            // If window tracker fails, stop the tracking
+            if (
+                error.message &&
+                error.message.includes('Window tracker not loaded')
+            ) {
+                alert(
+                    'Window tracker is not ready. Please stop and start tracking again.'
+                );
+                // Stop the current tracking
+                const stopBtn = document.getElementById('stop-btn');
+                if (stopBtn && !stopBtn.disabled) {
+                    stopBtn.click();
+                }
+            }
         }
-        iter++;
     };
 
     displayFuncID = setInterval(call, 2000);
