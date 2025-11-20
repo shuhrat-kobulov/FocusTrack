@@ -71,12 +71,26 @@
 
         <div id="tab-2" class="tabcontent">
             <div class="text-center">
-                <div id="pie"></div>
-                <div id="legend"></div>
-                <br />
-                <button type="button" id="render-btn" class="btn">
-                    Stop Rendering
-                </button>
+                <h3>Analytics Dashboard</h3>
+
+                <!-- Bar Chart Section -->
+                <div class="chart-section">
+                    <h4>Application Usage Time</h4>
+                    <div id="bar-chart"></div>
+                    <button type="button" id="refresh-bar-chart" class="btn">
+                        Refresh Chart
+                    </button>
+                </div>
+
+                <!-- Pie Chart Section -->
+                <div class="chart-section">
+                    <h4>Usage Distribution</h4>
+                    <div id="pie"></div>
+                    <div id="legend"></div>
+                    <button type="button" id="render-btn" class="btn">
+                        Stop Rendering
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -87,5 +101,6 @@
         <script src="js/tracker/timer.js"></script>
         <script src="js/tracker/script.js"></script>
         <script src="js/charts/piechart.js"></script>
+        <script src="js/charts/barchart.js"></script>
     </body>
 </html>

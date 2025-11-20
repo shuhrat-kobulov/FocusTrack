@@ -342,4 +342,98 @@ h6 {
     .btn {
         width: 100%;
     }
+
+    /* Bar Chart Mobile Styles */
+    #bar-chart svg {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Chart Sections Mobile */
+    .chart-section {
+        margin: 1rem 0;
+        padding: 1rem;
+    }
+
+    .chart-section h4 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Chart Sections */
+.chart-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.chart-section h4 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Bar Chart Styles */
+#bar-chart {
+    max-width: 700px;
+    margin: 1rem auto;
+}
+
+#bar-chart svg {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Bar Chart Axis Styling */
+#bar-chart .x-axis text,
+#bar-chart .y-axis text {
+    fill: var(--text-primary);
+    font-size: 11px;
+}
+
+#bar-chart .x-axis path,
+#bar-chart .y-axis path,
+#bar-chart .x-axis line,
+#bar-chart .y-axis line {
+    stroke: var(--border-color);
+}
+
+/* Chart Title Styling */
+#bar-chart .chart-title {
+    fill: var(--text-primary);
+}
+
+#bar-chart .x-axis-label,
+#bar-chart .y-axis-label {
+    fill: var(--text-secondary);
+}
+
+/* Bar Chart Label Styling */
+#bar-chart .bar-label {
+    fill: var(--text-primary);
+}
+
+/* Empty Message Styling */
+#bar-chart .empty-message {
+    fill: var(--text-muted);
+}
+
+/* Tooltip Styling for Dark Mode */
+[data-theme='dark'] .tooltip {
+    background: rgba(42, 42, 42, 0.95) !important;
+    border: 1px solid var(--border-color);
+}
+
+/* Bar Chart Animation */
+#bar-chart .bar {
+    transition: opacity 0.2s ease;
+}
+
+#bar-chart .bar:hover {
+    stroke: var(--text-primary);
+    stroke-width: 1px;
 }
