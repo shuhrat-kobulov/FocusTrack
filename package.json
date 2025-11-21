@@ -20,9 +20,6 @@
         "electron-builder": "^26.0.12",
         "icon-gen": "^5.0.0"
     },
-    "dependencies": {
-        "get-windows": "^9.2.3"
-    },
     "build": {
         "appId": "com.focustrack.app",
         "productName": "FocusTrack",

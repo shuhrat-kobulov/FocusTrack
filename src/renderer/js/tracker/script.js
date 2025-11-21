@@ -42,12 +42,12 @@ async function initializeWindowTracker() {
  */
 function extractAppName(owner) {
     // Use the name property if available (preferred)
-    if (owner.name) {
+    if (owner?.name) {
         return owner.name.replace(/\s+/g, ''); // Remove spaces for consistency
     }
 
     // Fallback: extract from path
-    const path = owner.path;
+    const path = owner?.path;
     if (!path) return 'Unknown';
 
     // Get filename without extension
@@ -195,10 +195,10 @@ function displayActiveWin() {
     let call = async () => {
         try {
             let winDetails = await getActiveWindow();
-
-            let appWinTitle = winDetails.title;
-            let appName = extractAppName(winDetails.owner);
-            let appPath = winDetails.owner.path;
+            console.log('Window Details:', winDetails);
+            let appWinTitle = winDetails?.title;
+            let appName = extractAppName(winDetails?.owner);
+            let appPath = winDetails?.owner?.path;
 
             if (iter === 0) {
                 mainTimerWatch = setInterval(

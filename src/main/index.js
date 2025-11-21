@@ -9,16 +9,19 @@ let mainWindow;
  * Initialize the application
  */
 function initialize() {
-    // Register all IPC handlers
+    // Register all IPC handlers before app is ready
     registerWindowTrackerHandlers();
 
     // Create window when app is ready
     app.on('ready', () => {
-        mainWindow = createMainWindow();
+        // Add a small delay to ensure all modules are loaded
+        setTimeout(() => {
+            mainWindow = createMainWindow();
 
-        mainWindow.on('closed', () => {
-            mainWindow = null;
-        });
+            mainWindow.on('closed', () => {
+                mainWindow = null;
+            });
+        }, 500);
     });
 
     // Quit when all windows are closed

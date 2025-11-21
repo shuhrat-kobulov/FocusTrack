@@ -97,7 +97,3 @@ function showShortcutsHelp() {
     console.log('  R - Reset timer');
     console.log('  T - Switch tabs');
 }
-
-// Log shortcuts on load
-console.log('⌨️  Keyboard shortcuts enabled');
-console.log('   Space: Start/Stop | R: Reset | T: Switch tab');

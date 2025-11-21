@@ -1,19 +1,13 @@
 const { ipcMain } = require('electron');
+const WindowTracker = require('../utils/windowTracker');
 
-// Import get-windows dynamically (ES module)
-let getActiveWindow;
-let isLoaded = false;
+// Initialize window tracker
+const windowTracker = new WindowTracker();
+let isLoaded = true; // PowerShell-based tracker is always available
 
-(async () => {
-    try {
-        const module = await import('get-windows');
-        getActiveWindow = module.activeWindow;
-        isLoaded = true;
-        console.log('Window tracker module loaded successfully');
-    } catch (error) {
-        console.error('Failed to load get-windows:', error);
-    }
-})();
+console.log(
+    'Window tracker module initialized successfully (PowerShell-based)'
+);
 
 /**
  * Register IPC handlers for window tracking
@@ -21,19 +15,19 @@ let isLoaded = false;
 function registerWindowTrackerHandlers() {
     // Handle IPC call from renderer to check if window tracker is ready
     ipcMain.handle('is-window-tracker-ready', async () => {
-        return isLoaded && !!getActiveWindow;
+        return isLoaded;
     });
 
     // Handle IPC call from renderer to get active window
     ipcMain.handle('get-active-window', async () => {
-        if (!isLoaded || !getActiveWindow) {
+        if (!isLoaded) {
             throw new Error(
                 'Window tracker not loaded yet. Please wait a moment and try again.'
             );
         }
 
         try {
-            const result = await getActiveWindow();
+            const result = await windowTracker.getActiveWindow();
             return result;
         } catch (error) {
             console.error('Error getting active window:', error);
@@ -45,23 +39,18 @@ function registerWindowTrackerHandlers() {
                 // macOS-specific permission errors
                 if (
                     error.message &&
-                    error.message.includes('screen recording')
+                    (error.message.includes('screen recording') ||
+                        error.message.includes('Screen Recording'))
                 ) {
                     throw new Error(
                         'Screen Recording permission required. Please grant permission in System Settings › Privacy & Security › Screen Recording'
                     );
                 }
-
-                if (error.stdout && error.stdout.includes('screen recording')) {
-                    throw new Error(
-                        'Screen Recording permission required. Please enable it in:\nSystem Settings › Privacy & Security › Screen Recording'
-                    );
-                }
             } else if (platform === 'win32') {
                 // Windows-specific error handling
-                if (error.message && error.message.includes('access')) {
+                if (error.message && error.message.includes('PowerShell')) {
                     throw new Error(
-                        'Windows access permissions required. Please run the application as administrator if issues persist.'
+                        'PowerShell execution failed. Please ensure PowerShell is available and execution policy allows script execution.'
                     );
                 }
             }
