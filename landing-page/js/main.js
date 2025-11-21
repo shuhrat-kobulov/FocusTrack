@@ -2,7 +2,6 @@
 const navbarToggle = document.getElementById('navbarToggle');
 const navbarMenu = document.getElementById('navbarMenu');
 const backToTop = document.getElementById('backToTop');
-const downloadButtons = document.querySelectorAll('[data-platform]');
 const modal = document.getElementById('downloadModal');
 const modalClose = document.getElementById('modalClose');
 const faqQuestions = document.querySelectorAll('.faq-question');
@@ -90,14 +89,6 @@ const downloadLinks = {
 };
 
 // Handle download button clicks
-downloadButtons.forEach((button) => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault();
-        const platform = button.dataset.platform;
-        handleDownload(platform);
-    });
-});
-
 function handleDownload(platform) {
     const downloadInfo = downloadLinks[platform];
 
