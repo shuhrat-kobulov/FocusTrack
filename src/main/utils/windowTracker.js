@@ -309,54 +309,89 @@ class WindowTracker {
      * Get active window on macOS using osascript
      */
     async getActiveWindowMacOS() {
-        const script = `
-            tell application "System Events"
-                set frontApp to name of first application process whose frontmost is true
-                set appPath to POSIX path of (path to application frontApp)
-            end tell
-            
-            tell application frontApp
-                set windowName to name of front window
-            end tell
-            
-            return "{\"title\":\"" & windowName & "\",\"owner\":{\"name\":\"" & frontApp & "\",\"path\":\"" & appPath & "\"}}"
-        `;
+        // Use a simpler approach with separate commands to avoid AppleScript syntax issues
+
+        // First get the frontmost application name
+        const getAppScript =
+            'tell application "System Events" to get name of first application process whose frontmost is true';
 
         return new Promise((resolve, reject) => {
-            const osascript = spawn('osascript', ['-e', script]);
+            const getApp = spawn('osascript', ['-e', getAppScript]);
 
-            let stdout = '';
-            let stderr = '';
+            let appName = '';
+            let appError = '';
 
-            osascript.stdout.on('data', (data) => {
-                stdout += data.toString();
+            getApp.stdout.on('data', (data) => {
+                appName += data.toString().trim();
             });
 
-            osascript.stderr.on('data', (data) => {
-                stderr += data.toString();
+            getApp.stderr.on('data', (data) => {
+                appError += data.toString();
             });
 
-            osascript.on('close', (code) => {
-                if (code === 0 && stdout.trim()) {
-                    try {
-                        const result = JSON.parse(stdout.trim());
-                        resolve(result);
-                    } catch (parseError) {
-                        resolve({
-                            title: stdout.trim().replace(/"/g, ''),
-                            owner: { name: 'Unknown', path: '' },
-                        });
-                    }
-                } else {
-                    reject(
-                        new Error(
-                            `AppleScript failed: ${
-                                stderr ||
-                                'Screen recording permission may be required'
-                            }`
-                        )
-                    );
+            getApp.on('close', (code) => {
+                if (code !== 0 || !appName) {
+                    resolve({
+                        title: 'Unknown',
+                        owner: { name: 'Unknown', path: '' },
+                        error: appError || 'Failed to get frontmost app',
+                    });
+                    return;
                 }
+
+                // Clean the app name (remove quotes if any)
+                appName = appName.replace(/^"|"$/g, '');
+
+                // Try to get window name using a safer approach
+                const getWindowScript = `
+                    try
+                        tell application "System Events"
+                            tell process "${appName.replace(/"/g, '\\"')}"
+                                if (count of windows) > 0 then
+                                    set windowTitle to name of front window
+                                    return windowTitle
+                                else
+                                    return "${appName.replace(/"/g, '\\"')}"
+                                end if
+                            end tell
+                        end tell
+                    on error
+                        return "${appName.replace(/"/g, '\\"')}"
+                    end try
+                `;
+
+                const getWindow = spawn('osascript', ['-e', getWindowScript]);
+
+                let windowName = '';
+
+                getWindow.stdout.on('data', (data) => {
+                    windowName += data.toString().trim();
+                });
+
+                getWindow.on('close', (windowCode) => {
+                    // Clean window name
+                    windowName = windowName.replace(/^"|"$/g, '') || appName;
+
+                    resolve({
+                        title: windowName,
+                        owner: { name: appName, path: '' },
+                    });
+                });
+
+                getWindow.on('error', () => {
+                    resolve({
+                        title: appName,
+                        owner: { name: appName, path: '' },
+                    });
+                });
+            });
+
+            getApp.on('error', () => {
+                resolve({
+                    title: 'Unknown',
+                    owner: { name: 'Unknown', path: '' },
+                    error: 'Failed to execute osascript',
+                });
             });
         });
     }
