@@ -101,6 +101,9 @@ let iter = 0,
     history = [],
     outputHTML = '';
 
+/** The app name of the currently logged session (used by the logger) */
+let _currentLoggedApp = null;
+
 const startBtn = document.getElementById('start-btn'),
     stopBtn = document.getElementById('stop-btn'),
     resetBtn = document.getElementById('reset-btn'),
@@ -111,6 +114,55 @@ startBtn.disabled = true;
 startBtn.textContent = 'Loading...';
 stopBtn.disabled = true;
 resetBtn.disabled = true;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Activity logger helpers
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Notify the main process that a new app session has started.
+ * Silently no-ops if the same app is already active (handled in main).
+ * @param {string} appName
+ */
+async function logSessionStart(appName) {
+    if (!appName || appName === 'Unknown') return;
+    try {
+        await window.electronAPI.startActivitySession(appName);
+        _currentLoggedApp = appName;
+    } catch (err) {
+        console.warn('[Logger] startActivitySession failed:', err.message);
+    }
+}
+
+/**
+ * Notify the main process to finalise and persist the current session.
+ */
+async function logSessionEnd() {
+    if (!_currentLoggedApp) return;
+    try {
+        await window.electronAPI.endActivitySession();
+        _currentLoggedApp = null;
+    } catch (err) {
+        console.warn('[Logger] endActivitySession failed:', err.message);
+    }
+}
+
+/**
+ * Called on every poll tick with the latest detected appName.
+ * Starts a new session when the active app changes; the main process
+ * ensures the previous session is ended atomically.
+ * @param {string} appName
+ */
+async function syncActivitySession(appName) {
+    if (!appName || appName === 'Unknown') return;
+    if (appName !== _currentLoggedApp) {
+        await logSessionStart(appName);
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Tracker controls
+// ─────────────────────────────────────────────────────────────────────────────
 
 startBtn.addEventListener('click', () => {
     if (!activeWinLoaded) {
@@ -144,6 +196,9 @@ function resume() {
                 addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
                 history.push(appName);
             }
+
+            // Keep activity session in sync on resume
+            await syncActivitySession(appName);
         } catch (error) {
             console.error('Error in resume function:', error);
             // If window tracker fails, stop the tracking
@@ -174,13 +229,15 @@ function funcClearInterval() {
     clearInterval(addTimerID);
 }
 
-stopBtn.addEventListener('click', () => {
+stopBtn.addEventListener('click', async () => {
     startBtn.disabled = false;
     stopBtn.disabled = true;
     funcClearInterval();
+    // End the active session when the user stops tracking
+    await logSessionEnd();
 });
 
-resetBtn.addEventListener('click', () => {
+resetBtn.addEventListener('click', async () => {
     resetBtn.disabled = true;
     stopBtn.disabled = true;
     startBtn.disabled = false;
@@ -189,6 +246,8 @@ resetBtn.addEventListener('click', () => {
     ulElem.innerHTML = '';
     iter = 0;
     history = [];
+    // End the active session on reset
+    await logSessionEnd();
 });
 
 function displayActiveWin() {
@@ -228,6 +287,9 @@ function displayActiveWin() {
 
                 addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
                 history.push(appName);
+
+                // Log the very first session
+                await logSessionStart(appName);
             } else if (!history.includes(appName)) {
                 clearInterval(addTimerID);
 
@@ -251,6 +313,9 @@ function displayActiveWin() {
                 ulElem.innerHTML += outputHTML;
                 addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
                 history.push(appName);
+
+                // New app detected → start a new session (main process ends the previous one)
+                await logSessionStart(appName);
             } else if (
                 history.includes(appName) &&
                 appName != history[history.length - 1]
@@ -261,6 +326,9 @@ function displayActiveWin() {
                 let badge = document.getElementById(`span-${appName}`);
                 let badgeNum = Number(badge.innerHTML);
                 badge.innerHTML = badgeNum + 1;
+
+                // Returning to a known app → still a new session interval
+                await logSessionStart(appName);
             }
             iter++;
         } catch (error) {

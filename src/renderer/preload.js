@@ -19,6 +19,31 @@ contextBridge.exposeInMainWorld('electronAPI', {
      * @returns {Promise<Object>} Active window details
      */
     getActiveWindow: () => ipcRenderer.invoke('get-active-window'),
+
+    // ── Activity Logger API ────────────────────────────────────────────────
+
+    /**
+     * Signal the start of a new app session.
+     * Safe to call repeatedly with the same appName – it's idempotent.
+     * @param {string} appName
+     * @returns {Promise<{ok:boolean}>}
+     */
+    startActivitySession: (appName) =>
+        ipcRenderer.invoke('activity:start-session', appName),
+
+    /**
+     * Finalise the currently active session and persist it.
+     * @returns {Promise<{ok:boolean}>}
+     */
+    endActivitySession: () => ipcRenderer.invoke('activity:end-session'),
+
+    /**
+     * Retrieve all logged sessions for a given date.
+     * @param {string} [date] – YYYY-MM-DD (defaults to today in main process)
+     * @returns {Promise<{ok:boolean, sessions:Array}>}
+     */
+    getActivitySessions: (date) =>
+        ipcRenderer.invoke('activity:get-sessions', date),
 });
 
 console.log('Preload script loaded - electronAPI exposed');
