@@ -235,6 +235,8 @@ stopBtn.addEventListener('click', async () => {
     funcClearInterval();
     // End the active session when the user stops tracking
     await logSessionEnd();
+    // Refresh insights after session ends
+    if (window.InsightCard) window.InsightCard.refresh();
 });
 
 resetBtn.addEventListener('click', async () => {
@@ -248,6 +250,8 @@ resetBtn.addEventListener('click', async () => {
     history = [];
     // End the active session on reset
     await logSessionEnd();
+    // Refresh insights after reset
+    if (window.InsightCard) window.InsightCard.refresh();
 });
 
 function displayActiveWin() {

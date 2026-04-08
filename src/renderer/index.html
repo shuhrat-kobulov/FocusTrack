@@ -67,6 +67,11 @@
             <div class="container">
                 <ul id="list" class="list-group"></ul>
             </div>
+
+            <!-- Insight Card -->
+            <div class="container">
+                <div id="insight-card-root"></div>
+            </div>
         </div>
 
         <div id="tab-2" class="tabcontent">
@@ -98,9 +103,16 @@
         <script src="js/ui/theme-toggle.js"></script>
         <script src="js/ui/keyboard-shortcuts.js"></script>
         <script src="js/ui/app-icons.js"></script>
+        <script src="js/ui/insight-card.js"></script>
         <script src="js/tracker/timer.js"></script>
         <script src="js/tracker/script.js"></script>
         <script src="js/charts/piechart.js"></script>
         <script src="js/charts/barchart.js"></script>
+        <script>
+            // Boot the Insight Card once the DOM is ready
+            document.addEventListener('DOMContentLoaded', function () {
+                InsightCard.init('insight-card-root');
+            });
+        </script>
     </body>
 </html>
